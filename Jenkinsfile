@@ -78,7 +78,7 @@ pipeline {
                 script {
                     try {
                         bat '''
-                        pip install python-dateutil pytest
+                        pip install python-dateutil pytest httpx fastapi
 
                         REM Run tests
                         pytest --junitxml=test-results.xml
