@@ -7,7 +7,7 @@ pipeline {
                 [key: 'WEBHOOK_TRIGGER', value: '$.trigger', defaultValue: '']
             ],
             causeString: 'Triggered by webhook',
-            token: 'push_here',
+            token: 'trieu_ne',
             printContributedVariables: true,
             printPostContent: true
         )
@@ -28,7 +28,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git branch: "main", url: 'https://github.com/Swcyenh/Jenkin-MLops.git'
+                git branch: "main", url: 'https://github.com/Trieudayne/Jenkins_MLops66_4.git'
             }
         }
 
