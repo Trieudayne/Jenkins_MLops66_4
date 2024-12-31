@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh '''
+                        bash '''
                         #!/bin/bash
 
                         # Check if the container already exists
@@ -78,7 +78,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh '''
+                        bash '''
                         # Run tests
                         pytest --junitxml=test-results.xml
                         '''
