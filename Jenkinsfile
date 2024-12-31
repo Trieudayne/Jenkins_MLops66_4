@@ -36,23 +36,21 @@ pipeline {
             steps {
                 script {
                     try {
-                        bash '''
-                        #!/bin/bash
-
-                        # Check if the container already exists
-                        if docker ps -a --format '{{.Names}}' | grep -q "^api_running$"; then
+                        bat '''
+                        REM Check if the container already exists
+                        docker ps -a --format "{{.Names}}" | findstr "api_running" >nul && (
                             echo "Container 'api_running' already exists. Removing it..."
                             docker stop api_running
                             docker rm -f api_running
-                        fi
+                        )
 
-                        # Remove existing Docker image
-                        if docker images | grep -q "api"; then
+                        REM Remove existing Docker image
+                        docker images | findstr "api" >nul && (
                             echo "Removing existing Docker image..."
                             docker rmi -f api
-                        fi
+                        )
 
-                        # Build and run the FastAPI container
+                        REM Build and run the FastAPI container
                         echo "Building the Docker image..."
                         docker build -t api .
 
@@ -74,12 +72,13 @@ pipeline {
                 }
             }
         }
+
         stage('Run Tests') {
             steps {
                 script {
                     try {
-                        bash '''
-                        # Run tests
+                        bat '''
+                        REM Run tests
                         pytest --junitxml=test-results.xml
                         '''
                         withChecks('Run Tests') {
