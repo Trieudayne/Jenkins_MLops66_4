@@ -78,6 +78,8 @@ pipeline {
                 script {
                     try {
                         bat '''
+                        pip install python-dateutil
+
                         REM Run tests
                         pytest --junitxml=test-results.xml
                         '''
