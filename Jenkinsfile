@@ -78,7 +78,7 @@ pipeline {
                 script {
                     try {
                         bat '''
-                        pip install python-dateutil
+                        pip install python-dateutil pytest
 
                         REM Run tests
                         pytest --junitxml=test-results.xml
