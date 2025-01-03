@@ -7,7 +7,7 @@ pipeline {
                 [key: 'WEBHOOK_TRIGGER', value: '$.trigger', defaultValue: '']
             ],
             causeString: 'Triggered by webhook',
-            token: 'trieu_ne',
+            token: 'push_here',
             printContributedVariables: true,
             printPostContent: true
         )
@@ -37,15 +37,17 @@ pipeline {
                 script {
                     try {
                         sh '''
+                        #!/bin/bash
+
                         # Check if the container already exists
-                        if [ $(docker ps -a --format "{{.Names}}" | grep -c "api_running") -gt 0 ]; then
+                        if docker ps -a --format '{{.Names}}' | grep -q "^api_running$"; then
                             echo "Container 'api_running' already exists. Removing it..."
                             docker stop api_running
                             docker rm -f api_running
                         fi
 
                         # Remove existing Docker image
-                        if [ $(docker images | grep -c "api") -gt 0 ]; then
+                        if docker images | grep -q "api"; then
                             echo "Removing existing Docker image..."
                             docker rmi -f api
                         fi
@@ -72,14 +74,11 @@ pipeline {
                 }
             }
         }
-
         stage('Run Tests') {
             steps {
                 script {
                     try {
                         sh '''
-                        pip install python-dateutil pytest httpx fastapi
-
                         # Run tests
                         pytest --junitxml=test-results.xml
                         '''
