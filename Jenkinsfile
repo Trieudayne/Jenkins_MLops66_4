@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        bat '''
+                        sh '''
                         REM Check if the container already exists
                         docker ps -a --format "{{.Names}}" | findstr "api_running" >nul && (
                             echo "Container 'api_running' already exists. Removing it..."
@@ -77,7 +77,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        bat '''
+                        sh '''
                         pip install python-dateutil pytest httpx fastapi
 
                         REM Run tests
