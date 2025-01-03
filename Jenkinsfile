@@ -37,20 +37,17 @@ pipeline {
                 script {
                     try {
                         sh '''
-                        REM Check if the container already exists
                         docker ps -a --format "{{.Names}}" | findstr "api_running" >nul && (
                             echo "Container 'api_running' already exists. Removing it..."
                             docker stop api_running
                             docker rm -f api_running
                         )
 
-                        REM Remove existing Docker image
                         docker images | findstr "api" >nul && (
                             echo "Removing existing Docker image..."
                             docker rmi -f api
                         )
 
-                        REM Build and run the FastAPI container
                         echo "Building the Docker image..."
                         docker build -t api .
 
@@ -79,8 +76,7 @@ pipeline {
                     try {
                         sh '''
                         pip install python-dateutil pytest httpx fastapi
-
-                        REM Run tests
+                        
                         pytest --junitxml=test-results.xml
                         '''
                         withChecks('Run Tests') {
