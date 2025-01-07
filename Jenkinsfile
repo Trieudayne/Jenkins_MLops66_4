@@ -51,7 +51,7 @@ pipeline {
                             echo "Removing existing Docker image..."
                             docker rmi -f api
                         fi
-
+                        ls -a
                         # Build and run the FastAPI container
                         echo "Building the Docker image..."
                         docker build -t api .
