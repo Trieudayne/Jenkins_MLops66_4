@@ -16,7 +16,7 @@ pipeline {
     options {
         skipDefaultCheckout() // Prevent automatic checkout
     }
-
+//check
     stages {
         stage('Start Pipeline') {
             steps {
