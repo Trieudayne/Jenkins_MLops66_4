@@ -1,14 +1,11 @@
 # Use an official Python runtime as a parent image
-FROM python:3.12.7
+FROM python:3.12.0
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
 COPY . /app
-
-# List files in /app to verify they were copied correctly
-RUN ls -la /app
 
 # Set environment variable for the port
 ENV PORT 80
