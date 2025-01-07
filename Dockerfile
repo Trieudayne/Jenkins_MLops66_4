@@ -8,10 +8,10 @@ WORKDIR /app
 COPY . /app
 
 # Set environment variable for the port
-ENV PORT 80
+ENV PORT 2004
 
 # Expose the port to the outside world
-EXPOSE 80
+EXPOSE 2004
 #test
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
