@@ -7,7 +7,7 @@ pipeline {
                 [key: 'WEBHOOK_TRIGGER', value: '$.trigger', defaultValue: '']
             ],
             causeString: 'Triggered by webhook',
-            token: 'push_here',
+            token: 'trieu_ne',
             printContributedVariables: true,
             printPostContent: true
         )
@@ -51,7 +51,7 @@ pipeline {
                             echo "Removing existing Docker image..."
                             docker rmi -f api
                         fi
-                        ls -a
+                        ls
                         # Build and run the FastAPI container
                         echo "Building the Docker image..."
                         docker build -t api .
